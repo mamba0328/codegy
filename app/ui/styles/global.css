@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+    --primary-bg: #2D3250;
+    --secondary-bg: #424769;
+    --primary-color: #F6B17A;
+    --secondary-color: #7077A1;
+}
+
+.item-skeleton{
+    position: relative;
+    overflow: hidden;
+}
+
+.item-skeleton:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    height: 100vh;
+    width: 10px;
+    transform: rotate(10deg);
+    background-color: var(--secondary-color);
+
+    animation: 1s ease-in infinite both running running-line;;
+}
+
+@keyframes running-line {
+    0%{
+        left: -10%;
+    }
+    100%{
+        left: 110%;
+    }
+}

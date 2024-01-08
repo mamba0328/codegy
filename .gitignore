@@ -1,0 +1,7 @@
+#Generated folders
+/.next
+/node_modules
+/.idea
+
+#SECRETS
+/.env.local
