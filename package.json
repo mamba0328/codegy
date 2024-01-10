@@ -11,6 +11,8 @@
     "clsx": "^2.1.0",
     "glob-to-regexp": "^0.4.1",
     "graceful-fs": "^4.2.11",
+    "html-react-parser": "^5.0.11",
+    "isomorphic-dompurify": "^2.2.0",
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
     "nanoid": "^3.3.7",
@@ -26,6 +28,7 @@
     "watchpack": "^2.4.0"
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/node": "20.10.7",
     "@types/react": "18.2.47",
     "autoprefixer": "^10.4.16",

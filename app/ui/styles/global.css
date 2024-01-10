@@ -10,12 +10,12 @@
     --secondary-color: #7077A1;
 }
 
-.item-skeleton{
+.skeleton-animation{
     position: relative;
     overflow: hidden;
 }
 
-.item-skeleton:after{
+.skeleton-animation:after{
     content: '';
     position: absolute;
     top: -10px;
