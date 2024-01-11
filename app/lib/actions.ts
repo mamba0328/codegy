@@ -5,23 +5,33 @@ import {
     LOGIN,
     VERIFY_JWT,
     REFRESH_TOKEN,
+    USERS,
     POSTS_COMMENTS
 }                                       from "./api-consts";
 
 type LoginPayload = {
     username: string;
     password: string;
-    is_author: boolean;
+};
+
+type SignupPayload = {
+    username: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    password: string;
+    confirmPassword: string;
 };
 
 const axiosApi = axios.create({
     baseURL: process.env.API_ENDPOINT,
+    withCredentials: true,
 });
 
 
 axiosApi.interceptors.request.use((req):any => {
     if (typeof window !== 'undefined' && localStorage.getItem('token')) {
-        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+        req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     }
     return req;
 })
@@ -45,6 +55,10 @@ export const getSinglePostsComments = (post_id:string) => {
 
 export const sendLogin = (obj: LoginPayload) => {
     return post(LOGIN, obj);
+}
+
+export const createUser = (obj: SignupPayload) => {
+    return post(USERS, obj);
 }
 export const verifyToken = () => {
     return get(VERIFY_JWT);
