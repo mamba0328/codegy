@@ -1,11 +1,19 @@
-import React from 'react';
+'use client'
+import React, { useState, useEffect } from 'react';
 
 import { getCurrentUser } from "../../lib/actions";
-async function ProfileComponent(props) {
-    const currentUser = await getCurrentUser();
-    console.log(currentUser)
+import { User } from "../../lib/definitions";
+
+function ProfileComponent(props) {
+    const [currentUser, setCurrentUser] = useState({} as User)
+    useEffect(() => {
+        (async () => {
+            const user = await getCurrentUser();
+            setCurrentUser(user.data)
+        })()
+    }, [])
     return (
-        <div></div>
+        <div>{currentUser.username}</div>
     );
 }
 
