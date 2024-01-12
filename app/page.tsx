@@ -1,4 +1,4 @@
-import {Suspense} from "react";
+import { Suspense } from "react";
 
 import PostList from "./ui/PostsList/PostList";
 import PostsListSkeleton from "./ui/skeletons/PostsListSkeleton";

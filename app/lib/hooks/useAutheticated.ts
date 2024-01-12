@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { refreshToken, verifyToken } from "../actions";
 
-export const useAuthenticated = async () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+export const useAuthenticated =  () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(undefined)
     const checkTokenIsOk = async () => {
         try {
             await verifyToken();

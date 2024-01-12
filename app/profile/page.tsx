@@ -1,13 +1,21 @@
-'use client'
+import React, {useEffect, useState} from "react";
 
 import { useAuthenticated } from "../lib/hooks/useAutheticated";
+
 import AuthComponent from "../ui/AuthComponent/AuthComponent";
+import ProfileComponent from "../ui/ProfileComponent/ProfileComponent";
+
 function Page(props) {
-    const userIsAuthenticated = useAuthenticated();
+    //TODO: use redux and check on initiation if auth;
+    const isAuth = useAuthenticated();
+
+    if(isAuth === undefined){
+        return <>Loading...</>
+    }
 
     return (
         <>
-            {userIsAuthenticated ? <div>Profile</div> : <AuthComponent/>}
+            {isAuth ? <ProfileComponent/> : <AuthComponent/>}
         </>
     );
 }

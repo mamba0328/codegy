@@ -1,6 +1,5 @@
 import React, { SyntheticEvent, useReducer } from 'react';
 import { createUser } from "../../lib/actions";
-import Router from "next/router";
 
 function reducer(state, event){
     const {name, value} = event.target as HTMLButtonElement;
@@ -28,7 +27,8 @@ function SignInForm(props) {
             const response = await createUser(formData);
             const {token} = response.data;
             setToken(token);
-            Router.reload();
+
+            window.location.reload();
         } catch (error){
             console.log(error)
         }

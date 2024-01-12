@@ -6,11 +6,12 @@ import {
     VERIFY_JWT,
     REFRESH_TOKEN,
     USERS,
+    GET_CURRENT_USER,
     POSTS_COMMENTS
 }                                       from "./api-consts";
 
 type LoginPayload = {
-    username: string;
+    email: string;
     password: string;
 };
 
@@ -59,6 +60,10 @@ export const sendLogin = (obj: LoginPayload) => {
 
 export const createUser = (obj: SignupPayload) => {
     return post(USERS, obj);
+}
+
+export const getCurrentUser = () => {
+    return get(GET_CURRENT_USER);
 }
 export const verifyToken = () => {
     return get(VERIFY_JWT);

@@ -1,8 +1,7 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { sendLogin } from "../../lib/actions";
-import Router from "next/router";
 function SignInForm(props) {
-    const [username, setUsername] = useState('');
+    const [email, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const setToken = (token:string) => {
@@ -12,20 +11,21 @@ function SignInForm(props) {
     const onInputChange = (event: SyntheticEvent) => {
         const {name, value} = event.target as HTMLButtonElement;
 
-        return name === 'username' ? setUsername(value) : setPassword(value);
+        return name === 'email' ? setUsername(value) : setPassword(value);
     }
     const onSubmit = async (event: SyntheticEvent) => {
         try{
             event.preventDefault();
 
             const payload = {
-                password, username,
+                password, email,
             }
 
             const response = await sendLogin(payload);
             const {token} = response.data;
             setToken(token);
-            Router.reload();
+
+            window.location.reload();
         } catch (error){
             console.log(error)
         }
@@ -35,10 +35,10 @@ function SignInForm(props) {
             <form className="flex flex-col gap-4 flex-grow mx-auto bg-secondary-bg px-8 pt-6 pb-8 mb-4" onSubmit={onSubmit}>
                 <h4 className={'text-primary-color font-bold text-xl'}>Sign-in</h4>
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="username">
-                        Username
+                    <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="email">
+                        Email
                     </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" name={'username'} value={username} onChange={onInputChange}/>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="example@codegy.com" name={'email'} value={email} onChange={onInputChange}/>
                 </div>
                 <div>
                     <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="password ">
