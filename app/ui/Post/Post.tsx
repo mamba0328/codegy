@@ -2,21 +2,29 @@ import parse from 'html-react-parser';
 import DOMPurify from "isomorphic-dompurify";
 import { unstable_noStore as noStore }  from 'next/cache';
 
-import {Post} from "../../lib/definitions";
-import { getSinglePost } from "../../lib/actions";
+import { Post, Comment } from "../../lib/definitions";
+import { getSinglePost, getSinglePostsComments } from "../../lib/actions";
 
+import PostComments from "../PostComments/PostComments";
+import PostFeedback from "../PostFeedback/PostFeedback";
 async function Post({postId, ...props}) {
     noStore();
 
-    const response = await getSinglePost(postId);
-    const post = response.data as Post;
+    //TODO: -Check like, delete like;
+    //      -Sort comments;
+    //      -Check if auth user;
+    //      -Bug -401 when token die but cookie dosn't;
+
+    const [postResponse, commentsRespone] = await Promise.all([getSinglePost(postId), getSinglePostsComments(postId)]);
+    const post = postResponse.data as Post;
+    const comments = commentsRespone.data as Comment[];
 
     const { body, tags, title, author_id, created_at } = post;
     const authorName = post?.author_id?.username;
     const sanitizedHTML = DOMPurify.sanitize(body); //to prevent XSS attacks
 
     return (
-        <section className={'flex justify-between flex-wrap gap-3 relative w-[762px] mx-auto'}>
+        <section className={'flex justify-between flex-wrap gap-2 relative w-[762px] mx-auto'}>
             <article className={'post min-desktop:max-w-[700px] w-full'}>
                 <div className={'bg-secondary-bg py-2 mb-2'}>
                     <div className={'relative mb-5'}>
@@ -32,6 +40,8 @@ async function Post({postId, ...props}) {
                     {parse(sanitizedHTML)}
                 </div>
             </article>
+            <PostFeedback postId={postId}/>
+            <PostComments style={''} comments={comments}/>
         </section>
     );
 }

@@ -27,6 +27,46 @@
     animation: 1s ease-in infinite both running running-line;;
 }
 
+.heart {
+    background-color: var(--secondary-color);
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+    width: 20px;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+}
+
+.heart:before {
+    top: -10px;
+    left: 0;
+}
+
+.heart:after {
+    left: 10px;
+    top: 0;
+}
+
+.heart.active, .heart.active:before, .heart.active:after{
+    background-color: var(--primary-color);
+}
+
+
+textarea:focus, input:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
 @keyframes running-line {
     0%{
         left: -10%;

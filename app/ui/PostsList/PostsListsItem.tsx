@@ -17,7 +17,7 @@ function PostsListsItem({post, ...props}:Props) {
     const textFromHtml = removeHTMLTags(htmlTextLimited);
     const formattedDate = getFormattedDate(created_at);
     return (
-        <li className={` bg-secondary-bg text-secondary-color max-w-[800px] w-full p-5 cursor-pointer`} key={`${title}_${created_at}`}>
+        <li className={` bg-secondary-bg text-secondary-color max-w-[800px] w-full p-5 cursor-pointer`} key={`${title}_${_id}`}>
             <Link href={`/post/${_id}`}>
                 <h4 className={`${chivo.className} text-primary-color font-bold text-xl leading-tight`}>{title}</h4>
                 <div className={'flex justify-between mb-3  flex-wrap'}>
@@ -25,9 +25,9 @@ function PostsListsItem({post, ...props}:Props) {
                     <span className={`${poppins.className} text-sm text-primary-color`}>{formattedDate}</span>
                 </div>
                 <p className={`${poppins.className} mb-3 text-white`}>{textFromHtml}</p>
-                <ul className={'flex text-primary-color gap-3 flex-wrap'}>
+                <ul className={'flex text-primary-color gap-3 flex-wrap'} key={`${_id}`}>
                     {tags.map((tag, index) => {
-                        return (<li key={`${tag}_${index}`} className={'py-1 px-2 border border-primary-color rounded-xl min-w-[50px] text-center'} >{tag}</li>)
+                        return (<li key={`${tag}_${index}_${_id}`} className={'py-1 px-2 border border-primary-color rounded-xl min-w-[50px] text-center'} >{tag}</li>)
                     })}
                 </ul>
             </Link>

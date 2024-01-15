@@ -1,19 +1,33 @@
 'use client'
-import React, { useState, useEffect } from 'react';
 
-import { getCurrentUser } from "../../lib/actions";
-import { User } from "../../lib/definitions";
+import React, {Suspense, useEffect, useState} from 'react';
 
-function ProfileComponent(props) {
-    const [currentUser, setCurrentUser] = useState({} as User)
-    useEffect(() => {
-        (async () => {
-            const user = await getCurrentUser();
-            setCurrentUser(user.data)
-        })()
+import AuthComponent from "../AuthComponent/AuthComponent";
+import {useAuthenticated} from "../../lib/hooks/useAutheticated";
+import Loader from "../Loader/Loader";
+
+function ProfileComponent({children}) {
+    const [loaded, setLoaded] = useState(false)
+    const [isAuth, setIsAuth] = useState(false);
+
+    async function checkIsAuth(){
+        const userIsAuth = await useAuthenticated();
+        setIsAuth(userIsAuth)
+        setLoaded(true)
+    }
+
+    useEffect(()=> {
+        checkIsAuth();
     }, [])
+
+    if(!loaded){
+        return <Loader/>
+    }
+
     return (
-        <div>{currentUser.username}</div>
+        <>
+            {isAuth ? children : <AuthComponent/>}
+        </>
     );
 }
 

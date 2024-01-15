@@ -7,7 +7,9 @@ import {
     REFRESH_TOKEN,
     USERS,
     GET_CURRENT_USER,
-    POSTS_COMMENTS
+    LOGOUT,
+    POSTS_COMMENTS,
+    POSTS_LIKES,
 }                                       from "./api-consts";
 
 type LoginPayload = {
@@ -49,6 +51,13 @@ export const getSinglePost = (id:string) => {
 export const getAllComments = () => {
     return get(POSTS_COMMENTS);
 }
+export const createComment = (postPayload) => {
+    return post(POSTS_COMMENTS, postPayload);
+}
+
+export const createLike = (postPayload) => {
+    return post(POSTS_LIKES, postPayload);
+}
 
 export const getSinglePostsComments = (post_id:string) => {
     return get(`${POSTS_COMMENTS}/?post_id=${post_id}`);
@@ -56,6 +65,10 @@ export const getSinglePostsComments = (post_id:string) => {
 
 export const sendLogin = (obj: LoginPayload) => {
     return post(LOGIN, obj);
+}
+
+export const sendLogout = () => {
+    return get(LOGOUT);
 }
 
 export const createUser = (obj: SignupPayload) => {

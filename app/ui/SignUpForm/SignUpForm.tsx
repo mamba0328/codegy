@@ -7,14 +7,14 @@ function reducer(state, event){
 }
 function SignInForm(props) {
     const [formData, dispatch] = useReducer(reducer, {
-            firstname: '',
-            lastname: '',
+            first_name: '',
+            last_name: '',
             username: '',
             email: '',
             password: '',
             confirmPassword: '',
         })
-    const {firstname, lastname, username, email, password, confirmPassword} = formData;
+    const {first_name, last_name, username, email, password, confirmPassword} = formData;
     const onInputChange = (event) => dispatch(event);
     const setToken = (token:string) => {
         localStorage.setItem('token', token)
@@ -38,16 +38,16 @@ function SignInForm(props) {
         <form className="flex flex-col gap-4 flex-grow mx-auto bg-secondary-bg px-8 pt-6 pb-8 mb-4" onSubmit={onSubmit}>
             <h4 className={'text-primary-color font-bold text-xl'}>Sign-up</h4>
             <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="firstname">
+                <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="first_name">
                     Firstname
                 </label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstname" type="text" placeholder="Jessy" name={'firstname'} value={firstname} onChange={onInputChange}/>
+                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="first_name" type="text" placeholder="Jessy" name={'first_name'} value={first_name} onChange={onInputChange}/>
             </div>
             <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="lastname">
+                <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="last_name">
                     Lastname
                 </label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" type="text" placeholder="Pinkman" name={'lastname'} value={lastname} onChange={onInputChange}/>
+                <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="last_name" type="text" placeholder="Pinkman" name={'last_name'} value={last_name} onChange={onInputChange}/>
             </div>
             <div>
                 <label className="block text-gray-700 text-sm font-bold mb-2 text-secondary-color" htmlFor="username">
