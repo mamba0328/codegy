@@ -10,6 +10,7 @@ import {
     LOGOUT,
     POSTS_COMMENTS,
     POSTS_LIKES,
+    POSTS_LIKES_BY_USER,
 }                                       from "./api-consts";
 
 type LoginPayload = {
@@ -57,6 +58,12 @@ export const createComment = (postPayload) => {
 
 export const createLike = (postPayload) => {
     return post(POSTS_LIKES, postPayload);
+}
+export const deleteLike = (postId: string) => {
+    return del(`${POSTS_LIKES}/?post_id=${postId}`);
+}
+export const postLikedByUser = (postId: string) => {
+    return get(`${POSTS_LIKES_BY_USER}/?post_id=${postId}`);
 }
 
 export const getSinglePostsComments = (post_id:string) => {

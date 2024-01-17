@@ -2,22 +2,16 @@ import parse from 'html-react-parser';
 import DOMPurify from "isomorphic-dompurify";
 import { unstable_noStore as noStore }  from 'next/cache';
 
-import { Post, Comment } from "../../lib/definitions";
-import { getSinglePost, getSinglePostsComments } from "../../lib/actions";
+import { Post, } from "../../lib/definitions";
+import { getSinglePost  } from "../../lib/actions";
 
-import PostComments from "../PostComments/PostComments";
 import PostFeedback from "../PostFeedback/PostFeedback";
 async function Post({postId, ...props}) {
     noStore();
 
-    //TODO: -Check like, delete like;
-    //      -Sort comments;
-    //      -Check if auth user;
-    //      -Bug -401 when token die but cookie dosn't;
-
-    const [postResponse, commentsRespone] = await Promise.all([getSinglePost(postId), getSinglePostsComments(postId)]);
+    const postResponse = await getSinglePost(postId);
     const post = postResponse.data as Post;
-    const comments = commentsRespone.data as Comment[];
+
 
     const { body, tags, title, author_id, created_at } = post;
     const authorName = post?.author_id?.username;
@@ -40,8 +34,7 @@ async function Post({postId, ...props}) {
                     {parse(sanitizedHTML)}
                 </div>
             </article>
-            <PostFeedback postId={postId}/>
-            <PostComments style={''} comments={comments}/>
+            <PostFeedback postId={postId} />
         </section>
     );
 }

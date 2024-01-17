@@ -5,6 +5,7 @@ export const AUTHORS = `${API_GLOBAL}/authors`
 export const POSTS = `${API_GLOBAL}/posts`
 export const POSTS_COMMENTS = `${API_GLOBAL}/posts-comments`
 export const POSTS_LIKES = `${API_GLOBAL}/posts-likes`
+export const POSTS_LIKES_BY_USER = `${POSTS_LIKES}/by-user`
 export const LOGIN = `/login`;
 export const LOGOUT = `/logout`;
 export const REFRESH_TOKEN = `/refresh`;
